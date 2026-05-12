@@ -4,22 +4,6 @@
 
 当前内容全部位于 .github/agents 目录下，适合作为一个轻量的 agent 配置仓库使用。
 
-## 目录结构
-
-```text
-.
-└── .github/
-    └── agents/
-        ├── business-analyst.agent.md
-        ├── codebase-analyzer.agent.md
-        ├── end-user-guide-generator.agent.md
-        ├── jira-story-searcher.agent.md
-        ├── output-validator.agent.md
-        ├── repo-scanner.agent.md
-        ├── test-case-generator.agent.md
-        └── user-journey-mapper.agent.md
-```
-
 ## Agent 说明
 
 | Agent | 作用 |
@@ -32,6 +16,12 @@
 | test-case-generator | 基于用户旅程生成结构化测试用例文档。 |
 | end-user-guide-generator | 面向最终用户生成非技术操作指南。 |
 | output-validator | 对生成结果做存在性和完整性校验，供流水线自动重试使用。 |
+
+## Skill 说明
+
+| Skill | 作用 |
+| --- | --- |
+| codebase-analyzer | 作为 codebase-analyzer agent 的快捷入口，默认把阶段选择固定为 `all`，一次触发完整分析流水线。 |
 
 ## 流水线关系
 
@@ -52,11 +42,13 @@
 
 1. 在支持 GitHub Copilot 自定义 agent 的环境中打开该仓库。
 2. 确保 agent 定义文件位于 .github/agents 目录。
-3. 通过 Copilot Chat 调用相应 agent，按需执行单个 agent 或完整分析流水线。
+3. 如需使用 skill，确保 skill 文件位于 `.github/skills/skill-name/SKILL.md`。
+4. 通过 Copilot Chat 调用相应 agent 或 skill，按需执行单个 agent 或完整分析流水线。
 
 常见用法：
 
 - 使用 codebase-analyzer 生成完整分析产物。
+- 使用 codebase-analyzer skill 直接以 `all` 模式调用完整流水线。
 - 使用 business-analyst 先判断某个业务需求在当前代码库中是否可行。
 - 使用 repo-scanner 单独获取代码结构与依赖报告。
 
